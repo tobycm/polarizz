@@ -14,7 +14,8 @@ var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_dir := Vector2.RIGHT
 var last_input_dir := Vector2.RIGHT
-var zapper 
+var speed_multiplier := 1.0
+var zapper
 func _ready() -> void:
 	add_to_group("player")
 	zapper = get_tree().get_first_node_in_group("zapper")
@@ -38,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		"ui_down"
 	).normalized()
 
-	var move_speed = BASE_MOVE_SPEED 
+	var move_speed = BASE_MOVE_SPEED * speed_multiplier
 
 
 	# =====================================================
@@ -133,6 +134,10 @@ func _physics_process(delta: float) -> void:
 # =========================================================
 # RESET DRAWING
 # =========================================================
+
+func apply_speed_boost(boost: float) -> void:
+	speed_multiplier += boost
+
 
 func reset() -> void:
 	

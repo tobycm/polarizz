@@ -36,8 +36,12 @@ func spawn_enemy():
 
 func check_level_completion():
 	var active_enemies = get_tree().get_nodes_in_group("enemies")
-	
+
 	if active_enemies.size() == 0:
-		get_tree().get_first_node_in_group("scene_manager").increase_level()
+		var ability_manager = get_tree().get_first_node_in_group("ability_manager")
+		if ability_manager:
+			ability_manager.show_cards()
+		else:
+			get_tree().get_first_node_in_group("scene_manager").increase_level()
 	else:
 		get_tree().create_timer(1.0).timeout.connect(check_level_completion)

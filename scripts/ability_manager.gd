@@ -1,17 +1,29 @@
-extends Node
+extends CanvasLayer
 
-var speed_level: int = 0
+@onready var overlay: Control = $Overlay
+@onready var card_container: HBoxContainer = $Overlay/Cards/HBoxContainer
 
-const SPEED_MULTIPLIERS := [
-	1.0,
-	1.15,
-	1.30,
-	1.50
-]
 
-func upgrade_speed() -> void:
-	if speed_level < 3:
-		speed_level += 1
+func _ready() -> void:
+	add_to_group("ability_manager")
 
-func get_speed_multiplier() -> float:
-	return SPEED_MULTIPLIERS[speed_level]
+	for card in card_container.get_children():
+		card.selected.connect(_on_card_selected)
+
+
+func show_cards() -> void:
+	overlay.visible = true
+
+
+func hide_cards() -> void:
+	overlay.visible = false
+
+
+func _on_card_selected(speed_boost: float) -> void:
+	hide_cards()
+
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("apply_speed_boost"):
+		player.apply_speed_boost(speed_boost)
+
+	get_tree().get_first_node_in_group("scene_manager").increase_level()
