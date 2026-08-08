@@ -5,6 +5,8 @@ const MIN_POINT_DISTANCE := 10.0
 const POINT_RADIUS := 6.0
 const POINT_COLOR := Color.RED
 
+const ACTIVE_TIME := 1.0
+
 @onready var polygon: Polygon2D = $Polygon2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 
@@ -12,18 +14,29 @@ var points: Array[Vector2] = []
 var drawing := false
 var polygon_finished := false
 
+var zapper_active := false
+var active_timer := 0.0
+
+
 func _ready() -> void:
 	polygon.polygon = PackedVector2Array()
 	collision_polygon_2d.polygon = PackedVector2Array()
+
+
+func _process(delta: float) -> void:
+	if zapper_active:
+		active_timer += delta
+
+		if active_timer >= ACTIVE_TIME:
+			reset_zapper()
+
 
 func addPoint(tower_position: Vector2) -> void:
 
 	if polygon_finished:
 		return
 
-	# Convert global position to the StaticBody2D's local space.
 	var point := to_local(tower_position)
-
 
 	# First point
 	if points.is_empty():
@@ -42,20 +55,17 @@ func addPoint(tower_position: Vector2) -> void:
 		return
 
 
-	# Add point.
 	points.append(point)
 
 	print("Added point ", points.size(), ": ", point)
 
-	# Check if the player has returned to point 1.
 	check_for_completion(tower_position)
 
 	queue_redraw()
 
+
 # =========================================================
-
 # CHECK FOR RETURN TO POINT 1
-
 # =========================================================
 
 func check_for_completion(player_position: Vector2) -> void:
@@ -70,23 +80,19 @@ func check_for_completion(player_position: Vector2) -> void:
 		return
 
 
-	# Point 1 is stored in StaticBody2D local coordinates.
-	# Convert it back to global coordinates.
 	var first_point_global := to_global(points[0])
 
 
-	# Player must physically return to point 1.
 	if player_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
 
 		print("PLAYER RETURNED TO POINT 1!")
 
 		finish_polygon()
 
-	# =========================================================
 
-	# CREATE FINAL POLYGON
-
-	# =========================================================
+# =========================================================
+# CREATE FINAL POLYGON
+# =========================================================
 
 func finish_polygon() -> void:
 
@@ -96,6 +102,7 @@ func finish_polygon() -> void:
 	if points.size() < 3:
 		return
 
+
 	polygon_finished = true
 	drawing = false
 
@@ -103,27 +110,52 @@ func finish_polygon() -> void:
 	var final_polygon := PackedVector2Array(points)
 
 	polygon.polygon = final_polygon
-
-
 	collision_polygon_2d.polygon = final_polygon
+
+
+	# Start 1-second active period
+	zapper_active = true
+	active_timer = 0.0
 
 
 	print("================================")
 	print("POLYGON CREATED!")
 	print("TOTAL POINTS: ", points.size())
+	print("ZAPPER ACTIVE FOR 1 SECOND")
 	print("================================")
 
 	queue_redraw()
 
-	# =========================================================
 
-	# DRAW POINTS + PATH
+# =========================================================
+# RESET AFTER 1 SECOND
+# =========================================================
 
-	# =========================================================
+func reset_zapper() -> void:
+
+	zapper_active = false
+	active_timer = 0.0
+
+	# Remove old active zone
+	polygon.polygon = PackedVector2Array()
+	collision_polygon_2d.polygon = PackedVector2Array()
+
+	# Clear path so player must walk towers again
+	points.clear()
+	drawing = false
+	polygon_finished = false
+
+	print("ZAPPER RESET")
+
+	queue_redraw()
+
+
+# =========================================================
+# DRAW POINTS + PATH
+# =========================================================
 
 func _draw() -> void:
 
-	# Draw every point.
 	for point in points:
 
 		draw_circle(
