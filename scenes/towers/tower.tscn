@@ -1,18 +1,63 @@
 [gd_scene format=3 uid="uid://bjig1lpr6uul3"]
 
 [ext_resource type="Texture2D" uid="uid://ce347oop227n8" path="res://assets/tower.png" id="1_2x682"]
+[ext_resource type="Script" uid="uid://dgvu1webq6wlb" path="res://scripts/tower.gd" id="1_jfguu"]
+[ext_resource type="Texture2D" uid="uid://be7orks2nvgf4" path="res://assets/tower_charging_1.png" id="2_85u2j"]
+[ext_resource type="Texture2D" uid="uid://bxlx4qcb884nr" path="res://assets/tower_charging_3.png" id="3_xl0gn"]
+[ext_resource type="Texture2D" uid="uid://dnndsl7lgiqwi" path="res://assets/tower_charging_4.png" id="4_vqps3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2x682"]
-radius = 156.16017
+radius = 92.67925
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfw7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_85u2j")
+}],
+"loop": false,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xl0gn")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vqps3")
+}],
+"loop": false,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2x682")
+}],
+"loop": false,
+"name": &"3",
+"speed": 5.0
+}]
 
 [node name="tower" type="StaticBody2D" unique_id=1999638219]
 scale = Vector2(0.6, 0.6)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=961172420]
-position = Vector2(-4, -2)
-scale = Vector2(17.366455, 18.203833)
-texture = ExtResource("1_2x682")
+script = ExtResource("1_jfguu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=850511488]
 position = Vector2(1, 3)
 shape = SubResource("CircleShape2D_2x682")
+
+[node name="Timer" type="Timer" parent="." unique_id=390829874]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=567378]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_qfw7u")
+animation = &"3"
+autoplay = "3"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
