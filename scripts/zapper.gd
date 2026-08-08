@@ -20,6 +20,8 @@ var active_timer := 0.0
 
 
 func _ready() -> void:
+	add_to_group("zapper")
+
 	polygon.polygon = PackedVector2Array()
 	collision_polygon_2d.polygon = PackedVector2Array()
 	line.points = PackedVector2Array()

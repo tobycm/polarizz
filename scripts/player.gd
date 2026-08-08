@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@onready var zapper: StaticBody2D = $"../zapper"
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var line: Line2D = $Line2D
 @onready var line_collision: CollisionShape2D = $Line2D/Area2D/CollisionShape2D
@@ -15,10 +14,10 @@ var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_dir := Vector2.RIGHT
 var last_input_dir := Vector2.RIGHT
-
-
+var zapper 
 func _ready() -> void:
 	add_to_group("player")
+	zapper = get_tree().get_first_node_in_group("zapper")
 
 	line.top_level = true
 
@@ -31,6 +30,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	zapper = get_tree().get_first_node_in_group("zapper")
 	var input_dir := Input.get_vector(
 		"ui_left",
 		"ui_right",
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		"ui_down"
 	).normalized()
 
-	var move_speed := BASE_MOVE_SPEED * AbilityManager.get_speed_multiplier()
+	var move_speed = BASE_MOVE_SPEED 
 
 
 	# =====================================================
@@ -135,6 +135,7 @@ func _physics_process(delta: float) -> void:
 # =========================================================
 
 func reset() -> void:
+	
 	line.clear_points()
 
 	line.add_point(global_position)
@@ -169,11 +170,6 @@ func _on_area_2d_body_shape_entered(
 	if body.has_method("play_touch_sound"):
 		body.play_touch_sound()
 
-
-	# =====================================================
-	# DRAW PLAYER → TOWER
-	# =====================================================
-
 	if line.get_point_count() < 2:
 
 		if line.get_point_count() == 0:
@@ -187,18 +183,8 @@ func _on_area_2d_body_shape_entered(
 			body.global_position
 		)
 
-
-	# =====================================================
-	# UPDATE COLLISION LINE
-	# =====================================================
-
 	if line_collision.shape is SegmentShape2D:
 		line_collision.shape.b = body.global_position
-
-
-	# =====================================================
-	# TELL ZAPPER ABOUT TOWER
-	# =====================================================
 
 	zapper.addPoint(
 		body.global_position,
