@@ -4,7 +4,7 @@ const CLOSE_DISTANCE := 25.0
 const MIN_POINT_DISTANCE := 10.0
 const POINT_RADIUS := 6.0
 const POINT_COLOR := Color.RED
-var towers_touched = []
+
 const ACTIVE_TIME := 1.0
 @onready var line: Line2D = $Line2D
 
@@ -31,19 +31,15 @@ func _process(delta: float) -> void:
 		if active_timer >= ACTIVE_TIME:
 			reset_zapper()
 
-
-func addPoint(tower) -> void:
-	towers_touched.append(tower)
+func addPoint(tower_position: Vector2) -> void:
 	if polygon_finished:
-		
 		return
 
-	var point := to_local(tower.global_position)
+	var point := to_local(tower_position)
 
-	# First point
+	# First tower
 	if points.is_empty():
 		points.append(point)
-		line.add_point(point) # Line2D draw
 		drawing = true
 
 		print("Point 1: ", point)
@@ -51,19 +47,38 @@ func addPoint(tower) -> void:
 		queue_redraw()
 		return
 
-	# Don't add points that are too close together.
+
+	# -------------------------------------------------
+	# ARE WE RETURNING TO THE START?
+	# -------------------------------------------------
+
+	var first_point_global := to_global(points[0])
+
+	if tower_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
+
+		# Need at least THREE different towers first.
+		if points.size() >= 3:
+			print("RETURNED TO START - CLOSING POLYGON")
+			finish_polygon()
+		else:
+			print("NOT ENOUGH TOWERS TO CLOSE POLYGON")
+
+		return
+
+
+	# -------------------------------------------------
+	# NORMAL NEW TOWER
+	# -------------------------------------------------
+
+	# Don't add basically the same point twice.
 	if point.distance_to(points[-1]) < MIN_POINT_DISTANCE:
 		return
 
 	points.append(point)
-	line.add_point(point) # Line2D draw
 
 	print("Added point ", points.size(), ": ", point)
 
-	check_for_completion(tower.global_position)
-
 	queue_redraw()
-
 
 # =========================================================
 # CHECK FOR RETURN TO POINT 1
@@ -91,15 +106,12 @@ func check_for_completion(player_position: Vector2) -> void:
 # =========================================================
 
 func finish_polygon() -> void:
-	
 	if polygon_finished:
 		return
 
 	if points.size() < 3:
 		return
-	for tower in towers_touched:
-		tower.disable()
-	towers_touched.clear()
+
 	polygon_finished = true
 	drawing = false
 

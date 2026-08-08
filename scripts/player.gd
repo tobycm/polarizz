@@ -65,4 +65,4 @@ func _on_area_2d_body_shape_entered(
 	body_shape_index: int,
 	local_shape_index: int
 ) -> void:
-	zapper.addPoint(body)
+	zapper.addPoint(body.global_position)
