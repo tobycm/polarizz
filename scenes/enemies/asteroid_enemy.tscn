@@ -16,6 +16,9 @@ hit_points = 2
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_asteroid")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_asteroid")
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2

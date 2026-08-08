@@ -41,6 +41,9 @@ func set_texture(texture: Texture2D) -> void:
 
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+		if not body.is_in_group("zapper"):
+			return
+
 		hit_points -= 1
 
 		if hit_points <= 0:

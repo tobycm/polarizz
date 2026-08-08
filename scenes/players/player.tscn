@@ -35,6 +35,7 @@ animations = [{
 script = ExtResource("1_3vyb7")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1092480600]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1399075219]
 position = Vector2(-1.5, 3)

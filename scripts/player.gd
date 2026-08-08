@@ -10,15 +10,22 @@ const DASH_SPEED := 900.0
 const DASH_TIME := 0.08
 const DASH_COOLDOWN := 0.14
 
+const MAX_LIVES := 3
+
 var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_dir := Vector2.RIGHT
 var last_input_dir := Vector2.RIGHT
 var speed_multiplier := 1.0
 var zapper
+var lives := MAX_LIVES
+var is_dead := false
+var spawn_position: Vector2
+
 func _ready() -> void:
 	add_to_group("player")
 	zapper = get_tree().get_first_node_in_group("zapper")
+	spawn_position = global_position
 
 	line.top_level = true
 
@@ -31,6 +38,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
 	zapper = get_tree().get_first_node_in_group("zapper")
 	var input_dir := Input.get_vector(
 		"ui_left",
@@ -140,7 +150,7 @@ func apply_speed_boost(boost: float) -> void:
 
 
 func reset() -> void:
-	
+
 	line.clear_points()
 
 	line.add_point(global_position)
@@ -151,7 +161,48 @@ func reset() -> void:
 
 
 # =========================================================
-# TOWER DETECTED
+# HEALTH
+# =========================================================
+
+func take_damage(amount: int = 1) -> void:
+	if is_dead:
+		return
+
+	lives = max(lives - amount, 0)
+
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("set_hearts"):
+		hud.set_hearts(lives)
+
+	if lives <= 0:
+		die()
+
+
+func die() -> void:
+	is_dead = true
+	velocity = Vector2.ZERO
+	hide()
+
+	var dead_screen = get_tree().get_first_node_in_group("dead_screen")
+	if dead_screen and dead_screen.has_method("show_dead"):
+		dead_screen.show_dead()
+
+
+func respawn() -> void:
+	lives = MAX_LIVES
+	is_dead = false
+	velocity = Vector2.ZERO
+	global_position = spawn_position
+	reset()
+	show()
+
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("set_hearts"):
+		hud.set_hearts(lives)
+
+
+# =========================================================
+# TOWER / ENEMY DETECTED
 # =========================================================
 
 func _on_area_2d_body_shape_entered(
@@ -160,6 +211,17 @@ func _on_area_2d_body_shape_entered(
 	body_shape_index: int,
 	local_shape_index: int
 ) -> void:
+
+	if is_dead:
+		return
+
+	if body.is_in_group("enemies"):
+		take_damage(1)
+
+		if is_instance_valid(body):
+			body.queue_free()
+
+		return
 
 	if not body.is_in_group("tower"):
 		return

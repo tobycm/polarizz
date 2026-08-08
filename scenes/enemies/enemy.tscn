@@ -32,6 +32,9 @@ sprite_frames = SubResource("SpriteFrames_5uy6h")
 animation = &"walk"
 frame_progress = 0.051102635
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_md0e3")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=508235478]
 collision_layer = 0
 collision_mask = 2
