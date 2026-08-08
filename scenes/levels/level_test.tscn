@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b4h240i1oos51"]
+
+[ext_resource type="PackedScene" uid="uid://bbaj8evew5mgr" path="res://scenes/player.tscn" id="1_h0hot"]
+[ext_resource type="PackedScene" uid="uid://bjig1lpr6uul3" path="res://scenes/tower.tscn" id="2_yluh8"]
+
+[node name="level_test" type="Node2D" unique_id=366906254]
+
+[node name="player" parent="." unique_id=1099106914 instance=ExtResource("1_h0hot")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=766844339]
+zoom = Vector2(0.31, 0.31)
+
+[node name="tower" parent="." unique_id=1999638219 instance=ExtResource("2_yluh8")]
+position = Vector2(888, -350)

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bjig1lpr6uul3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7j8ug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2x682"]
+radius = 176.07101
+
+[node name="tower" type="StaticBody2D" unique_id=1999638219]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=961172420]
+scale = Vector2(0.46582028, 0.48828125)
+texture = SubResource("NoiseTexture2D_7j8ug")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1551210598]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=850511488]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_2x682")
