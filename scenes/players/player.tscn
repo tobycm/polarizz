@@ -29,6 +29,8 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kc87p"]
+
 [node name="player" type="CharacterBody2D" unique_id=1099106914]
 script = ExtResource("1_3vyb7")
 
@@ -47,5 +49,11 @@ autoplay = "stand"
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1391225401]
 
+[node name="Area2D" type="Area2D" parent="Line2D" unique_id=1465436263]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/Area2D" unique_id=1711835689]
+shape = SubResource("SegmentShape2D_kc87p")
+
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_entered" from="Line2D/Area2D" to="." method="_on_area_2d_body_shape_entered"]

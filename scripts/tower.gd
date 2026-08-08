@@ -6,9 +6,10 @@ extends StaticBody2D
 
 const DISABLE_ANIMS := ["0", "1", "2", "3"]
 var disable_step := 0
-
+var disabled=false
 func disable() -> void:
 	collision_shape.disabled = true
+	disabled=true
 	disable_step = 0
 	_play_disable_step()
 
@@ -19,6 +20,7 @@ func _on_timer_timeout() -> void:
 	else:
 		disable_timer.stop()
 		collision_shape.disabled = false
+		disabled=false
 
 func _play_disable_step() -> void:
 	animated_sprite_2d.play(DISABLE_ANIMS[disable_step])
