@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d342kjdlydk2y" path="res://scripts/level_test.gd" id="1_4ptlp"]
 [ext_resource type="PackedScene" uid="uid://bbaj8evew5mgr" path="res://scenes/players/player.tscn" id="1_h0hot"]
-[ext_resource type="PackedScene" uid="uid://blf62qs2n1x8e" path="res://scenes/enemies/enemy.tscn" id="2_ycf23"]
 [ext_resource type="PackedScene" uid="uid://bjig1lpr6uul3" path="res://scenes/towers/tower.tscn" id="2_yluh8"]
 [ext_resource type="Texture2D" uid="uid://blun66jyor2du" path="res://assets/ background.png" id="3_jp5fc"]
 [ext_resource type="PackedScene" uid="uid://c13c7vb0him8j" path="res://scenes/zapper/zapper.tscn" id="4_4ptlp"]
+[ext_resource type="PackedScene" uid="uid://beti3qasbhv1q" path="res://scenes/enemies/enemy_spawner.tscn" id="6_uh3ll"]
 
 [node name="level_test" type="Node2D" unique_id=366906254]
 script = ExtResource("1_4ptlp")
-enemy_scene = ExtResource("2_ycf23")
 
 [node name="zapper" parent="." unique_id=763171475 instance=ExtResource("4_4ptlp")]
 
@@ -48,5 +47,5 @@ offset_bottom = 652.0
 texture = ExtResource("3_jp5fc")
 stretch_mode = 1
 
-[node name="EnemySpawnTimer" type="Timer" parent="." unique_id=376487491]
-autostart = true
+[node name="enemy_spawner" parent="." unique_id=1907547480 instance=ExtResource("6_uh3ll")]
+enemy_num = 3
