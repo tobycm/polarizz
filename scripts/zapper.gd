@@ -4,7 +4,7 @@ const CLOSE_DISTANCE := 25.0
 const MIN_POINT_DISTANCE := 10.0
 const POINT_RADIUS := 6.0
 const POINT_COLOR := Color.RED
-
+var towers_touched = []
 const ACTIVE_TIME := 1.0
 @onready var line: Line2D = $Line2D
 
@@ -32,11 +32,13 @@ func _process(delta: float) -> void:
 			reset_zapper()
 
 
-func addPoint(tower_position: Vector2) -> void:
+func addPoint(tower) -> void:
+	towers_touched.append(tower)
 	if polygon_finished:
+		
 		return
 
-	var point := to_local(tower_position)
+	var point := to_local(tower.global_position)
 
 	# First point
 	if points.is_empty():
@@ -58,7 +60,7 @@ func addPoint(tower_position: Vector2) -> void:
 
 	print("Added point ", points.size(), ": ", point)
 
-	check_for_completion(tower_position)
+	check_for_completion(tower.global_position)
 
 	queue_redraw()
 
@@ -89,12 +91,15 @@ func check_for_completion(player_position: Vector2) -> void:
 # =========================================================
 
 func finish_polygon() -> void:
+	
 	if polygon_finished:
 		return
 
 	if points.size() < 3:
 		return
-
+	for tower in towers_touched:
+		tower.disable()
+	towers_touched.clear()
 	polygon_finished = true
 	drawing = false
 
