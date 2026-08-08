@@ -10,5 +10,14 @@
 [node name="Camera2D" type="Camera2D" parent="." unique_id=766844339]
 zoom = Vector2(0.31, 0.31)
 
-[node name="tower" parent="." unique_id=1999638219 instance=ExtResource("2_yluh8")]
+[node name="tower3" parent="." unique_id=1999638219 instance=ExtResource("2_yluh8")]
+position = Vector2(752, 406)
+
+[node name="tower2" parent="." unique_id=915054563 instance=ExtResource("2_yluh8")]
+position = Vector2(-641, 93)
+
+[node name="tower" parent="." unique_id=473140265 instance=ExtResource("2_yluh8")]
 position = Vector2(888, -350)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1366472696]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
