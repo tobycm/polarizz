@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://be7orks2nvgf4" path="res://assets/tower_charging_1.png" id="2_85u2j"]
 [ext_resource type="Texture2D" uid="uid://bxlx4qcb884nr" path="res://assets/tower_charging_3.png" id="3_xl0gn"]
 [ext_resource type="Texture2D" uid="uid://dnndsl7lgiqwi" path="res://assets/tower_charging_4.png" id="4_vqps3"]
+[ext_resource type="AudioStream" uid="uid://p156k8epruwq" path="res://assets/audio/tap.wav" id="6_dc0g6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2x682"]
 radius = 92.67925
@@ -59,5 +60,8 @@ scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_qfw7u")
 animation = &"3"
 autoplay = "3"
+
+[node name="TouchSound" type="AudioStreamPlayer2D" parent="." unique_id=1249300837]
+stream = ExtResource("6_dc0g6")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

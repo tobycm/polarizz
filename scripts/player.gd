@@ -69,17 +69,32 @@ func reset() -> void:
 	if line_collision.shape is SegmentShape2D:
 		line_collision.shape.a = global_position
 		line_collision.shape.b = global_position
-		
-func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if !body.disabled:
-		if line.get_point_count() < 2:
-			if line.get_point_count() == 0:
-				line.add_point(global_position)
-			else:
-				line.set_point_position(0, global_position)
-	
-			line.add_point(body.global_position, 1)
-		line_collision.shape.b=body.global_position
-		line.set_point_position(1, body.global_position)
-		print("enter" + str(body))
-		zapper.addPoint(body.global_position, body)
+
+func _on_area_2d_body_shape_entered(
+	body_rid: RID,
+	body: Node2D,
+	body_shape_index: int,
+	local_shape_index: int
+) -> void:
+	if not body.is_in_group("tower"):
+		return
+
+	if body.disabled:
+		return
+
+	if body.has_method("play_touch_sound"):
+		body.play_touch_sound()
+
+	if line.get_point_count() < 2:
+		if line.get_point_count() == 0:
+			line.add_point(global_position)
+		else:
+			line.set_point_position(0, global_position)
+
+		line.add_point(body.global_position, 1)
+
+	if line_collision.shape is SegmentShape2D:
+		line_collision.shape.b = body.global_position
+
+	line.set_point_position(1, body.global_position)
+	zapper.addPoint(body.global_position, body)
