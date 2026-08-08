@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://16s8y4q08g3e" path="res://scripts/enemy.gd" id="1_asteroid"]
+[ext_resource type="Texture2D" uid="uid://lau5m6yn27gm" path="res://assets/asteroid_1.png" id="2_asteroid"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asteroid"]
+radius = 13.0
+
+[node name="AsteroidEnemy" type="CharacterBody2D"]
+scale = Vector2(4.172, 4.172)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_asteroid")
+hit_points = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_asteroid")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_asteroid")
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
