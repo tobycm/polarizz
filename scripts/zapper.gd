@@ -5,7 +5,7 @@ const MIN_POINT_DISTANCE := 10.0
 const POINT_RADIUS := 6.0
 const POINT_COLOR := Color.RED
 
-@onready var polygon: Polygon2D = $"Polygon2D"
+@onready var polygon: Polygon2D = $Polygon2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 
 var points: Array[Vector2] = []
@@ -14,25 +14,49 @@ var polygon_finished := false
 
 func _ready() -> void:
 	polygon.polygon = PackedVector2Array()
+	collision_polygon_2d.polygon = PackedVector2Array()
 
 func addPoint(tower_position: Vector2) -> void:
 
 	if polygon_finished:
 		return
-	var point := polygon.to_local(tower_position)
+
+	# Convert global position to the StaticBody2D's local space.
+	var point := to_local(tower_position)
+
+
+	# First point
 	if points.is_empty():
+
 		points.append(point)
 		drawing = true
+
 		print("Point 1: ", point)
+
 		queue_redraw()
 		return
+
+
+	# Don't add points that are too close together.
 	if point.distance_to(points[-1]) < MIN_POINT_DISTANCE:
 		return
+
+
+	# Add point.
 	points.append(point)
 
 	print("Added point ", points.size(), ": ", point)
+
+	# Check if the player has returned to point 1.
 	check_for_completion(tower_position)
+
 	queue_redraw()
+
+# =========================================================
+
+# CHECK FOR RETURN TO POINT 1
+
+# =========================================================
 
 func check_for_completion(player_position: Vector2) -> void:
 
@@ -45,21 +69,24 @@ func check_for_completion(player_position: Vector2) -> void:
 	if points.size() < 3:
 		return
 
-	var first_point_global := polygon.to_global(points[0])
+
+	# Point 1 is stored in StaticBody2D local coordinates.
+	# Convert it back to global coordinates.
+	var first_point_global := to_global(points[0])
 
 
-	# Check if the player is back at point 1.
+	# Player must physically return to point 1.
 	if player_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
 
 		print("PLAYER RETURNED TO POINT 1!")
 
 		finish_polygon()
 
-# =========================================================
+	# =========================================================
 
-# CREATE THE FINAL POLYGON
+	# CREATE FINAL POLYGON
 
-# =========================================================
+	# =========================================================
 
 func finish_polygon() -> void:
 
@@ -72,8 +99,23 @@ func finish_polygon() -> void:
 	polygon_finished = true
 	drawing = false
 
-	# The polygon is ONLY created/fillled here.
-	polygon.polygon = PackedVector2Array(points)
+
+	var final_polygon := PackedVector2Array(points)
+
+
+	# -------------------------------------------------------
+	# VISIBLE POLYGON
+	# -------------------------------------------------------
+
+	polygon.polygon = final_polygon
+
+
+	# -------------------------------------------------------
+	# COLLISION POLYGON
+	# -------------------------------------------------------
+
+	collision_polygon_2d.polygon = final_polygon
+
 
 	print("================================")
 	print("POLYGON CREATED!")
@@ -82,15 +124,19 @@ func finish_polygon() -> void:
 
 	queue_redraw()
 
+	# =========================================================
+
+	# DRAW POINTS + PATH
+
+	# =========================================================
+
 func _draw() -> void:
 
+	# Draw every point.
 	for point in points:
 
-		var global_point := polygon.to_global(point)
-		var local_point := to_local(global_point)
-
 		draw_circle(
-			local_point,
+			point,
 			POINT_RADIUS,
 			POINT_COLOR
 		)
@@ -100,15 +146,9 @@ func _draw() -> void:
 
 		for i in range(points.size() - 1):
 
-			var global_a := polygon.to_global(points[i])
-			var global_b := polygon.to_global(points[i + 1])
-
-			var local_a := to_local(global_a)
-			var local_b := to_local(global_b)
-
 			draw_line(
-				local_a,
-				local_b,
+				points[i],
+				points[i + 1],
 				POINT_COLOR,
 				3.0
 			)
