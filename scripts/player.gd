@@ -73,8 +73,20 @@ func _on_area_2d_body_shape_entered(
 	body_shape_index: int,
 	local_shape_index: int
 ) -> void:
-	if line.get_point_count()<2:
-		line.add_point(body.global_position,1)
+
+	# Ignore anything that isn't a tower.
+	if not body.is_in_group("tower"):
+		return
+
+	# Play the tower touch sound.
+	if body.has_method("play_touch_sound"):
+		body.play_touch_sound()
+
+	# Update player's line.
+	if line.get_point_count() < 2:
+		line.add_point(body.global_position, 1)
+
 	line.set_point_position(1, body.global_position)
 
+	# Add tower to zapper path.
 	zapper.addPoint(body.global_position)
