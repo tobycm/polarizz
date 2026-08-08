@@ -191,7 +191,8 @@ func _on_area_2d_body_shape_entered(
 	if line_collision.shape is SegmentShape2D:
 		line_collision.shape.b = body.global_position
 
-	zapper.addPoint(
-		body.global_position,
-		body
-	)
+	if is_instance_valid(zapper):
+		zapper.addPoint(
+			body.global_position,
+			body
+		)

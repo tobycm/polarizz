@@ -37,4 +37,4 @@ texture = ExtResource("3_jp5fc")
 stretch_mode = 1
 
 [node name="enemy_spawner" parent="." unique_id=1907547480 instance=ExtResource("6_uh3ll")]
-enemy_num = 1
+enemy_num = 10

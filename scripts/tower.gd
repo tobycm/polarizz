@@ -13,7 +13,7 @@ func play_touch_sound() -> void:
 	touch_sound.play()
 
 func disable() -> void:
-	collision_shape.disabled = true
+	collision_shape.set_deferred("disabled", true)
 	disabled=true
 	disable_step = 0
 	_play_disable_step()
@@ -26,7 +26,7 @@ func _on_timer_timeout() -> void:
 		_play_disable_step()
 	else:
 		disable_timer.stop()
-		collision_shape.disabled = false
+		collision_shape.set_deferred("disabled", false)
 		disabled=false
 
 

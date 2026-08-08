@@ -55,7 +55,7 @@ func addPoint(tower_position: Vector2, tower:Node2D) -> void:
 	if tower_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
 		if points.size() >= 3:
 			print("RETURNED TO START - CLOSING POLYGON")
-			finish_polygon()
+			call_deferred("finish_polygon")
 		else:
 			print("NOT ENOUGH TOWERS TO CLOSE POLYGON")
 		return
@@ -91,7 +91,7 @@ func check_for_completion(player_position: Vector2) -> void:
 
 	if player_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
 		print("PLAYER RETURNED TO POINT 1!")
-		finish_polygon()
+		call_deferred("finish_polygon")
 
 
 func finish_polygon() -> void:
@@ -122,7 +122,7 @@ func finish_polygon() -> void:
 	var final_polygon := PackedVector2Array(points)
 
 	polygon.polygon = final_polygon
-	collision_polygon_2d.polygon = final_polygon
+	collision_polygon_2d.call_deferred("set", "polygon", final_polygon)
 
 	# Disable towers
 	for tower in zapped_towers:
