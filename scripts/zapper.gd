@@ -92,10 +92,6 @@ func check_for_completion(player_position: Vector2) -> void:
 		finish_polygon()
 
 
-# =========================================================
-# CREATE FINAL POLYGON
-# =========================================================
-
 func finish_polygon() -> void:
 	if polygon_finished:
 		return
