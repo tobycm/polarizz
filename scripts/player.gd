@@ -1,106 +1,65 @@
 extends CharacterBody2D
 
-const SPEED := 300.0
-const POINT_RADIUS := 6.0
-const POINT_COLOR := Color.RED
-const CLOSE_DISTANCE := 25.0
-const MIN_POINT_DISTANCE := 10.0
+@onready var zapper: StaticBody2D = $"../zapper"
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@onready var polygon: Polygon2D = $"../Polygon2D"
+const MAX_SPEED := 320.0
+const ACCEL := 2200.0
+const FRICTION := 2600.0
 
-var points: Array[Vector2] = []
-var drawing := false
-var polygon_finished := false
+const DASH_SPEED := 620.0
+const DASH_TIME := 0.10
+const DASH_COOLDOWN := 0.18
 
-func _ready() -> void:
-	polygon.polygon = PackedVector2Array()
+var dash_timer := 0.0
+var dash_cooldown_timer := 0.0
+var dash_dir := Vector2.ZERO
 
-func _physics_process(_delta: float) -> void:
-	var direction := Input.get_vector(
-	"ui_left",
-	"ui_right",
-	"ui_up",
-	"ui_down"
-	)
+func _physics_process(delta: float) -> void:
+	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 
-	if direction != Vector2.ZERO:
-		velocity = direction * SPEED
+	if Input.is_action_just_pressed("ui_accept") and dash_cooldown_timer <= 0.0:
+		if input_dir != Vector2.ZERO:
+			dash_dir = input_dir
+		elif velocity != Vector2.ZERO:
+			dash_dir = velocity.normalized()
+		else:
+			dash_dir = Vector2.RIGHT
+
+		dash_timer = DASH_TIME
+		dash_cooldown_timer = DASH_COOLDOWN
+
+	if dash_timer > 0.0:
+		dash_timer -= delta
+	if dash_cooldown_timer > 0.0:
+		dash_cooldown_timer -= delta
+
+	if dash_timer > 0.0:
+		velocity = dash_dir * DASH_SPEED
 	else:
-		velocity = Vector2.ZERO
+		var target_velocity := input_dir * MAX_SPEED
+
+		if input_dir != Vector2.ZERO:
+			velocity = velocity.move_toward(target_velocity, ACCEL * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	move_and_slide()
 
+	if velocity.length() > 20.0:
+		animated_sprite_2d.play("walk")
+		animated_sprite_2d.speed_scale = clamp(velocity.length() / MAX_SPEED * 1.35, 0.9, 1.8)
+	else:
+		animated_sprite_2d.play("stand")
+		animated_sprite_2d.speed_scale = 1.0
 
-	queue_redraw()
+	if velocity.x != 0:
+		animated_sprite_2d.flip_h = velocity.x > 0
 
-func _on_area_2d_body_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
-	print("Collision with: ", _body.name, " at ", _body.global_position)
-	if polygon_finished:
-		return
-	if _body == null:
-		return
-	# Use the player's position.
-	var point := polygon.to_local(_body.global_position)
-
-	# First collision = point 1.
-	if points.is_empty():
-		points.append(point)
-		drawing = true
-
-		print("Point 1: ", point)
-
-	# Add another point if it's far enough from the previous point.
-	elif point.distance_to(points[-1]) >= MIN_POINT_DISTANCE:
-		points.append(point)
-
-		print("Added point ", points.size(), ": ", point)
-	if drawing and not polygon_finished and points.size() >= 3:
-		var first_point_global := polygon.to_global(points[0])
-		if _body.global_position.distance_to(first_point_global) <= CLOSE_DISTANCE:
-			finish_polygon()
-	queue_redraw()
-
-func finish_polygon() -> void:
-	if polygon_finished:
-		return
-
-	if points.size() < 3:
-		return
-
-	polygon_finished = true
-	drawing = false
-
-	# ONLY NOW does the polygon become filled.
-	polygon.polygon = PackedVector2Array(points)
-
-	print("POLYGON CREATED!")
-	print("Total points: ", points.size())
-
-	queue_redraw()
-
-func _draw() -> void:
-# Draw the points while the player is making the shape.
-	for point in points:
-		var global_point := polygon.to_global(point)
-		var local_point := to_local(global_point)
-
-		draw_circle(
-			local_point,
-			POINT_RADIUS,
-			POINT_COLOR
-		)
-
-		if points.size() >= 2 and not polygon_finished:
-			for i in range(points.size() - 1):
-				var global_a := polygon.to_global(points[i])
-				var global_b := polygon.to_global(points[i + 1])
-
-				var local_a := to_local(global_a)
-				var local_b := to_local(global_b)
-
-				draw_line(
-					local_a,
-					local_b,
-					POINT_COLOR,
-					3.0
-				)
+func _on_area_2d_body_shape_entered(
+	body_rid: RID,
+	body: Node2D,
+	body_shape_index: int,
+	local_shape_index: int
+) -> void:
+	zapper.addPoint(body.global_position)
