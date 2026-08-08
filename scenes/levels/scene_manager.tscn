@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://div2drhmq4ry7"]
+
+[ext_resource type="Script" uid="uid://5gpl7u0fcgja" path="res://scripts/scene_manager.gd" id="1_f3ops"]
+[ext_resource type="PackedScene" uid="uid://bbaj8evew5mgr" path="res://scenes/players/player.tscn" id="2_fkay7"]
+[ext_resource type="PackedScene" uid="uid://0qbx21i6j2qs" path="res://scenes/menus/ability_manager.tscn" id="3_ability"]
+
+[node name="SceneManager" type="Node2D" unique_id=754255433]
+script = ExtResource("1_f3ops")
+
+[node name="level_container" type="Node2D" parent="." unique_id=1646759399]
+
+[node name="player" parent="." unique_id=1099106914 instance=ExtResource("2_fkay7")]
+z_index = 1
+
+[node name="AbilityManager" parent="." instance=ExtResource("3_ability")]

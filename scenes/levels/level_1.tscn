@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b4h240i1oos51"]
+
+[ext_resource type="Script" uid="uid://d342kjdlydk2y" path="res://scripts/level_test.gd" id="1_4ptlp"]
+[ext_resource type="PackedScene" uid="uid://bjig1lpr6uul3" path="res://scenes/towers/tower.tscn" id="2_yluh8"]
+[ext_resource type="Texture2D" uid="uid://blun66jyor2du" path="res://assets/ background.png" id="3_jp5fc"]
+[ext_resource type="PackedScene" uid="uid://c13c7vb0him8j" path="res://scenes/zapper/zapper.tscn" id="4_4ptlp"]
+[ext_resource type="PackedScene" uid="uid://beti3qasbhv1q" path="res://scenes/enemies/enemy_spawner.tscn" id="6_uh3ll"]
+
+[node name="level_test" type="Node2D" unique_id=366906254]
+script = ExtResource("1_4ptlp")
+
+[node name="zapper" parent="." unique_id=763171475 instance=ExtResource("4_4ptlp")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=766844339]
+position = Vector2(-2, 5)
+zoom = Vector2(0.31, 0.31)
+
+[node name="tower3" parent="." unique_id=1999638219 groups=["tower"] instance=ExtResource("2_yluh8")]
+position = Vector2(505, 279)
+
+[node name="tower4" parent="." unique_id=1288780494 groups=["tower"] instance=ExtResource("2_yluh8")]
+position = Vector2(114, -185)
+
+[node name="tower5" parent="." unique_id=1429251370 groups=["tower"] instance=ExtResource("2_yluh8")]
+position = Vector2(-199, 283)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=760792689]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1261959051]
+texture_repeat = 2
+offset_left = -11.0
+offset_top = 2.0
+offset_right = 1142.0
+offset_bottom = 652.0
+texture = ExtResource("3_jp5fc")
+stretch_mode = 1
+
+[node name="enemy_spawner" parent="." unique_id=1907547480 instance=ExtResource("6_uh3ll")]
+enemy_num = 1

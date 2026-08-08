@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://0qbx21i6j2qs"]
+
+[ext_resource type="Script" path="res://scripts/ability_manager.gd" id="1_manager"]
+[ext_resource type="PackedScene" path="res://scenes/menus/ability_.tscn" id="2_card"]
+[ext_resource type="Texture2D" path="res://assets/abilities/speed_card_1.png" id="3_tex1"]
+[ext_resource type="Texture2D" path="res://assets/abilities/speed_card_2.png" id="4_tex2"]
+[ext_resource type="Texture2D" path="res://assets/abilities/speed_card_3.png" id="5_tex3"]
+
+[node name="AbilityManager" type="CanvasLayer" unique_id=696738261]
+script = ExtResource("1_manager")
+layer = 5
+
+[node name="Overlay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Dim" type="ColorRect" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.65)
+mouse_filter = 0
+
+[node name="Cards" type="CenterContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Cards"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Card1" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
+layout_mode = 2
+texture = ExtResource("3_tex1")
+speed_boost = 0.1
+
+[node name="Card2" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
+layout_mode = 2
+texture = ExtResource("4_tex2")
+speed_boost = 0.15
+
+[node name="Card3" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
+layout_mode = 2
+texture = ExtResource("5_tex3")
+speed_boost = 0.2
