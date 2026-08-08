@@ -10,6 +10,7 @@ const FRICTION := 2600.0
 const DASH_SPEED := 620.0
 const DASH_TIME := 0.10
 const DASH_COOLDOWN := 0.18
+@onready var line: Line2D = $Line2D
 
 var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
@@ -17,9 +18,16 @@ var dash_dir := Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("player")
-
+	line.top_level = true   
+	if line.get_point_count() == 0:
+		line.add_point(global_position)
+	else:
+		line.set_point_position(0, global_position)
+	
+	
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
+	line.set_point_position(0, global_position)
 
 	if Input.is_action_just_pressed("ui_accept") and dash_cooldown_timer <= 0.0:
 		if input_dir != Vector2.ZERO:
@@ -65,4 +73,8 @@ func _on_area_2d_body_shape_entered(
 	body_shape_index: int,
 	local_shape_index: int
 ) -> void:
+	if line.get_point_count()<2:
+		line.add_point(body.global_position,1)
+	line.set_point_position(1, body.global_position)
+
 	zapper.addPoint(body)
