@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjig1lpr6uul3" path="res://scenes/towers/tower.tscn" id="2_yluh8"]
 [ext_resource type="Texture2D" uid="uid://blun66jyor2du" path="res://assets/ background.png" id="3_jp5fc"]
 [ext_resource type="PackedScene" uid="uid://c13c7vb0him8j" path="res://scenes/zapper/zapper.tscn" id="4_4ptlp"]
-[ext_resource type="PackedScene" uid="uid://beti3qasbhv1q" path="res://scenes/enemies/enemy_spawner.tscn" id="6_uh3ll"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_spawner.tscn" id="6_uh3ll"]
 
 [node name="level_test" type="Node2D" unique_id=366906254]
 script = ExtResource("1_4ptlp")
@@ -36,7 +36,6 @@ position = Vector2(85, 310)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=760792689]
 layer = -1
-visible = false
 
 [node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1261959051]
 texture_repeat = 2

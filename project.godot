@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://dycu7odg7t4ky"
+SceneManager="*uid://5gpl7u0fcgja"
+AbilityManager="*uid://bb3ac1ys6hd7"
 
 [display]
 

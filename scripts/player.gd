@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var line: Line2D = $Line2D
 @onready var line_collision: CollisionShape2D = $Line2D/Area2D/CollisionShape2D
 
-const MOVE_SPEED := 430.0
+const BASE_MOVE_SPEED := 430.0
 
 const DASH_SPEED := 900.0
 const DASH_TIME := 0.08
@@ -22,7 +22,6 @@ func _ready() -> void:
 
 	line.top_level = true
 
-	# Make absolutely sure the line starts with a point
 	line.clear_points()
 	line.add_point(global_position)
 
@@ -38,6 +37,8 @@ func _physics_process(delta: float) -> void:
 		"ui_up",
 		"ui_down"
 	).normalized()
+
+	var move_speed := BASE_MOVE_SPEED * AbilityManager.get_speed_multiplier()
 
 
 	# =====================================================
@@ -91,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	if dash_timer > 0.0:
 		velocity = dash_dir * DASH_SPEED
 	else:
-		velocity = input_dir * MOVE_SPEED
+		velocity = input_dir * move_speed
 
 	move_and_slide()
 
@@ -117,14 +118,13 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.play("walk")
 
 		animated_sprite_2d.speed_scale = clamp(
-			velocity.length() / MOVE_SPEED * 1.2,
+			velocity.length() / move_speed * 1.2,
 			1.0,
 			2.0
 		)
 	else:
 		animated_sprite_2d.play("stand")
 		animated_sprite_2d.speed_scale = 1.0
-
 
 	if velocity.x != 0.0:
 		animated_sprite_2d.flip_h = velocity.x > 0
@@ -137,7 +137,6 @@ func _physics_process(delta: float) -> void:
 func reset() -> void:
 	line.clear_points()
 
-	# Always leave point 0 behind
 	line.add_point(global_position)
 
 	if line_collision.shape is SegmentShape2D:
@@ -181,7 +180,6 @@ func _on_area_2d_body_shape_entered(
 			line.add_point(global_position)
 
 		line.add_point(body.global_position)
-
 
 	else:
 		line.set_point_position(
