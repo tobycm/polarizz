@@ -12,13 +12,21 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_g2els")
+}],
+"loop": false,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g2els")
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_qhqgy")
 }],
 "loop": true,
-"name": &"run",
-"speed": 2.0
+"name": &"walk",
+"speed": 4.0
 }]
 
 [node name="player" type="CharacterBody2D" unique_id=1099106914]
@@ -34,8 +42,8 @@ shape = SubResource("CircleShape2D_3vyb7")
 position = Vector2(0, -1)
 scale = Vector2(5.5625, 5.5625)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"run"
-autoplay = "run"
+animation = &"walk"
+autoplay = "stand"
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
