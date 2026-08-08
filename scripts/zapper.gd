@@ -102,17 +102,8 @@ func finish_polygon() -> void:
 
 	var final_polygon := PackedVector2Array(points)
 
-
-	# -------------------------------------------------------
-	# VISIBLE POLYGON
-	# -------------------------------------------------------
-
 	polygon.polygon = final_polygon
 
-
-	# -------------------------------------------------------
-	# COLLISION POLYGON
-	# -------------------------------------------------------
 
 	collision_polygon_2d.polygon = final_polygon
 

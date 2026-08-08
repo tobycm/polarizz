@@ -2,9 +2,10 @@ extends Node2D
 
 @export var enemy_scene: PackedScene
 @export var spawn_distance: float = 800.0
+@onready var enemy_spawn_timer: Timer = $EnemySpawnTimer
 
 func _ready():
-	$EnemySpawnTimer.timeout.connect(spawn_enemy)
+	enemy_spawn_timer.timeout.connect(spawn_enemy)
 
 func spawn_enemy():
 	var player = get_tree().get_first_node_in_group("player")
