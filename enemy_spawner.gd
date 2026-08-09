@@ -5,6 +5,8 @@ extends Node2D
 @export var enemy_num: int = 20
 @export var enemy_timer: float = 1.0
 @export var sprite_variants: Array[Texture2D] = []
+@export var zap_variants_1: Array[Texture2D] = []
+@export var zap_variants_2: Array[Texture2D] = []
 
 @onready var enemy_spawn_timer: Timer = $EnemySpawnTimer
 var enemies_made: int = 0
@@ -28,7 +30,13 @@ func spawn_enemy():
 		enemy.global_position = player.global_position + spawn_offset
 
 		if sprite_variants.size() > 0 and enemy.has_method("set_texture"):
-			enemy.set_texture(sprite_variants[enemies_made % sprite_variants.size()])
+			var variant_index = enemies_made % sprite_variants.size()
+			enemy.set_texture(sprite_variants[variant_index])
+
+			if enemy.has_method("set_zap_frames") \
+					and variant_index < zap_variants_1.size() \
+					and variant_index < zap_variants_2.size():
+				enemy.set_zap_frames(zap_variants_1[variant_index], zap_variants_2[variant_index])
 
 		add_child(enemy)
 		enemies_made += 1

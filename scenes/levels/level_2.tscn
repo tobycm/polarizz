@@ -10,6 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://tpn3lo68y4fq" path="res://assets/asteroid_2.png" id="9_asteroid2"]
 [ext_resource type="Texture2D" uid="uid://blmlk5siehx32" path="res://assets/asteroid_3.png" id="10_asteroid3"]
 [ext_resource type="Texture2D" uid="uid://cl08s0ytkepub" path="res://assets/asteroid_4.png" id="11_asteroid4"]
+[ext_resource type="Texture2D" uid="uid://0rpgp64cw135" path="res://assets/asteroid_1_zap_1.png" id="12_asteroid1zap1"]
+[ext_resource type="Texture2D" uid="uid://ckiy1qkqqlu4q" path="res://assets/asteroid_1_zap_2.png" id="13_asteroid1zap2"]
+[ext_resource type="Texture2D" uid="uid://cqdhoyqlhk22f" path="res://assets/asteroid_2_zap_1.png" id="14_asteroid2zap1"]
+[ext_resource type="Texture2D" uid="uid://t1wjsfi3542p" path="res://assets/asteroid_2_zap_2.png" id="15_asteroid2zap2"]
+[ext_resource type="Texture2D" uid="uid://5tm2bj8ktht6" path="res://assets/asteroid_3_zap_1.png" id="16_asteroid3zap1"]
+[ext_resource type="Texture2D" uid="uid://br1b4oal18hat" path="res://assets/asteroid_3_zap_2.png" id="17_asteroid3zap2"]
+[ext_resource type="Texture2D" uid="uid://b0vskhiloah0u" path="res://assets/asteroid_4_zap_1.png" id="18_asteroid4zap1"]
+[ext_resource type="Texture2D" uid="uid://py6f6ea7s0ol" path="res://assets/asteroid_4_zap_2.png" id="19_asteroid4zap2"]
 
 [node name="level_test" type="Node2D"]
 script = ExtResource("1_4ptlp")
@@ -45,3 +53,5 @@ stretch_mode = 1
 enemy_scene = ExtResource("7_asteroid")
 enemy_num = 10
 sprite_variants = [ExtResource("8_asteroid1"), ExtResource("9_asteroid2"), ExtResource("10_asteroid3"), ExtResource("11_asteroid4")]
+zap_variants_1 = [ExtResource("12_asteroid1zap1"), ExtResource("14_asteroid2zap1"), ExtResource("16_asteroid3zap1"), ExtResource("18_asteroid4zap1")]
+zap_variants_2 = [ExtResource("13_asteroid1zap2"), ExtResource("15_asteroid2zap2"), ExtResource("17_asteroid3zap2"), ExtResource("19_asteroid4zap2")]
