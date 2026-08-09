@@ -22,9 +22,10 @@ Global="*uid://dycu7odg7t4ky"
 [display]
 
 window/size/mode=2
-window/stretch/mode="viewport"
+window/size/window_width_override=2304
+window/size/window_height_override=1296
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
-window/stretch/scale=2.0
 
 [global_group]
 

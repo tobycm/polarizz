@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://c13c7vb0him8j"]
 
 [ext_resource type="Script" uid="uid://r7ikke4x50qf" path="res://scripts/zapper.gd" id="1_iivta"]
-[ext_resource type="Texture2D" uid="uid://dhktljwjnn8w3" path="res://assets/placeholders/asteroid_grey_tiny.png" id="2_rwb7l"]
+[ext_resource type="Texture2D" uid="uid://caav60dtww86f" path="res://assets/zap_1.png" id="2_fa6fr"]
+[ext_resource type="Texture2D" uid="uid://dxnesptr3lhkr" path="res://assets/zap_2.png" id="3_jiho0"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_rlut0"]
+frames = 2
+speed_scale = 4.0
+frame_0/texture = ExtResource("2_fa6fr")
+frame_1/texture = ExtResource("3_jiho0")
+frame_1/duration = 1.0
 
 [node name="zapper" type="StaticBody2D" unique_id=763171475]
 collision_layer = 2
@@ -9,11 +17,13 @@ collision_mask = 2
 script = ExtResource("1_iivta")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1652480674]
-texture = ExtResource("2_rwb7l")
+color = Color(0.99999946, 0.99696356, 0.3627702, 0.77254903)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=467282907]
+visible = false
 
 [node name="Line2D" type="Line2D" parent="." unique_id=411716141]
+z_index = 1
 width = 40.0
-texture = ExtResource("2_rwb7l")
+texture = SubResource("AnimatedTexture_rlut0")
 texture_mode = 1

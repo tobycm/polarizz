@@ -1,39 +1,69 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cc6pnkcfwikvn"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
-[ext_resource type="Texture2D" uid="uid://btx2qw6f88wed" path="res://assets/health_full.png" id="2_full"]
-[ext_resource type="Texture2D" uid="uid://jmpr86pp4ed8" path="res://assets/health_zero.png" id="3_zero"]
+[ext_resource type="Texture2D" uid="uid://bul4o6b8i7hkc" path="res://assets/heart.png" id="2_bo48s"]
+[ext_resource type="Texture2D" uid="uid://djkdlqq5apld5" path="res://assets/empty_heart.png" id="3_8qguk"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=383390262]
 layer = 4
 script = ExtResource("1_hud")
-full_texture = ExtResource("2_full")
-empty_texture = ExtResource("3_zero")
+full_texture = ExtResource("2_bo48s")
+empty_texture = ExtResource("3_8qguk")
 
-[node name="Hearts" type="HBoxContainer" parent="."]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 200.0
-offset_bottom = 64.0
-theme_override_constants/separation = 8
+[node name="Hearts" type="HBoxContainer" parent="." unique_id=1338500451]
+offset_left = 42.0
+offset_top = 264.0
+offset_right = 226.99997
+offset_bottom = 312.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/separation = 15
 
-[node name="Heart1" type="TextureRect" parent="Hearts"]
+[node name="Heart1" type="TextureRect" parent="Hearts" unique_id=1795408877]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("2_full")
+texture = ExtResource("2_bo48s")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Heart2" type="TextureRect" parent="Hearts"]
+[node name="Heart2" type="TextureRect" parent="Hearts" unique_id=24694687]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("2_full")
+texture = ExtResource("2_bo48s")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Heart3" type="TextureRect" parent="Hearts"]
+[node name="Heart3" type="TextureRect" parent="Hearts" unique_id=172081022]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("2_full")
+texture = ExtResource("2_bo48s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Hearts2" type="HBoxContainer" parent="." unique_id=1188902024]
+offset_left = 42.0
+offset_top = 286.0
+offset_right = 224.49997
+offset_bottom = 334.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/separation = 15
+
+[node name="Heart1" type="TextureRect" parent="Hearts2" unique_id=516440089]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_bo48s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="Hearts2" unique_id=280373731]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_bo48s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="Hearts2" unique_id=474777030]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_bo48s")
 expand_mode = 2
 stretch_mode = 5

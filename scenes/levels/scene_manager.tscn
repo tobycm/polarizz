@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://0qbx21i6j2qs" path="res://scenes/menus/ability_manager.tscn" id="3_ability"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dead_screen.tscn" id="5_dead"]
+[ext_resource type="Texture2D" uid="uid://bp08r2uikvt2o" path="res://assets/ui_overlay .png" id="6_ybmp1"]
 
 [node name="SceneManager" type="Node2D" unique_id=754255433]
 script = ExtResource("1_f3ops")
@@ -19,3 +20,11 @@ z_index = 1
 [node name="HUD" parent="." unique_id=1257814379 instance=ExtResource("4_hud")]
 
 [node name="DeadScreen" parent="." unique_id=873751147 instance=ExtResource("5_dead")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1682724076]
+layer = 3
+
+[node name="UiOverlay" type="Sprite2D" parent="CanvasLayer" unique_id=1396610397]
+position = Vector2(573, 349)
+scale = Vector2(0.5864036, 0.5877042)
+texture = ExtResource("6_ybmp1")

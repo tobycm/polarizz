@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c43ek8lm2mbst"]
 
 [ext_resource type="Script" uid="uid://d342kjdlydk2y" path="res://scripts/level_test.gd" id="1_4ptlp"]
 [ext_resource type="PackedScene" uid="uid://bjig1lpr6uul3" path="res://scenes/towers/tower.tscn" id="2_yluh8"]
 [ext_resource type="Texture2D" uid="uid://blun66jyor2du" path="res://assets/ background.png" id="3_jp5fc"]
 [ext_resource type="PackedScene" uid="uid://c13c7vb0him8j" path="res://scenes/zapper/zapper.tscn" id="4_4ptlp"]
 [ext_resource type="PackedScene" uid="uid://beti3qasbhv1q" path="res://scenes/enemies/enemy_spawner.tscn" id="6_uh3ll"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/asteroid_enemy.tscn" id="7_asteroid"]
+[ext_resource type="PackedScene" uid="uid://djf3qdcy6lyqd" path="res://scenes/enemies/asteroid_enemy.tscn" id="7_asteroid"]
 [ext_resource type="Texture2D" uid="uid://lau5m6yn27gm" path="res://assets/asteroid_1.png" id="8_asteroid1"]
 [ext_resource type="Texture2D" uid="uid://tpn3lo68y4fq" path="res://assets/asteroid_2.png" id="9_asteroid2"]
 [ext_resource type="Texture2D" uid="uid://blmlk5siehx32" path="res://assets/asteroid_3.png" id="10_asteroid3"]
@@ -19,28 +19,28 @@
 [ext_resource type="Texture2D" uid="uid://b0vskhiloah0u" path="res://assets/asteroid_4_zap_1.png" id="18_asteroid4zap1"]
 [ext_resource type="Texture2D" uid="uid://py6f6ea7s0ol" path="res://assets/asteroid_4_zap_2.png" id="19_asteroid4zap2"]
 
-[node name="level_test" type="Node2D"]
+[node name="level_test" type="Node2D" unique_id=1708232766]
 script = ExtResource("1_4ptlp")
 
-[node name="zapper" parent="." instance=ExtResource("4_4ptlp")]
+[node name="zapper" parent="." unique_id=335297411 instance=ExtResource("4_4ptlp")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1413303330]
 position = Vector2(-2, 5)
 zoom = Vector2(0.31, 0.31)
 
-[node name="tower3" parent="." groups=["tower"] instance=ExtResource("2_yluh8")]
+[node name="tower3" parent="." unique_id=1983968032 groups=["tower"] instance=ExtResource("2_yluh8")]
 position = Vector2(505, 279)
 
-[node name="tower4" parent="." groups=["tower"] instance=ExtResource("2_yluh8")]
+[node name="tower4" parent="." unique_id=363846462 groups=["tower"] instance=ExtResource("2_yluh8")]
 position = Vector2(114, -185)
 
-[node name="tower5" parent="." groups=["tower"] instance=ExtResource("2_yluh8")]
+[node name="tower5" parent="." unique_id=1490969437 groups=["tower"] instance=ExtResource("2_yluh8")]
 position = Vector2(-199, 283)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1250930436]
 layer = -1
 
-[node name="Background" type="TextureRect" parent="CanvasLayer"]
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1086012937]
 texture_repeat = 2
 offset_left = -11.0
 offset_top = 2.0
@@ -49,9 +49,9 @@ offset_bottom = 652.0
 texture = ExtResource("3_jp5fc")
 stretch_mode = 1
 
-[node name="enemy_spawner" parent="." instance=ExtResource("6_uh3ll")]
+[node name="enemy_spawner" parent="." unique_id=881468096 instance=ExtResource("6_uh3ll")]
 enemy_scene = ExtResource("7_asteroid")
-enemy_num = 10
-sprite_variants = [ExtResource("8_asteroid1"), ExtResource("9_asteroid2"), ExtResource("10_asteroid3"), ExtResource("11_asteroid4")]
-zap_variants_1 = [ExtResource("12_asteroid1zap1"), ExtResource("14_asteroid2zap1"), ExtResource("16_asteroid3zap1"), ExtResource("18_asteroid4zap1")]
-zap_variants_2 = [ExtResource("13_asteroid1zap2"), ExtResource("15_asteroid2zap2"), ExtResource("17_asteroid3zap2"), ExtResource("19_asteroid4zap2")]
+enemy_num = 1
+sprite_variants = Array[Texture2D]([ExtResource("8_asteroid1"), ExtResource("9_asteroid2"), ExtResource("10_asteroid3"), ExtResource("11_asteroid4")])
+zap_variants_1 = Array[Texture2D]([ExtResource("12_asteroid1zap1"), ExtResource("14_asteroid2zap1"), ExtResource("16_asteroid3zap1"), ExtResource("18_asteroid4zap1")])
+zap_variants_2 = Array[Texture2D]([ExtResource("13_asteroid1zap2"), ExtResource("15_asteroid2zap2"), ExtResource("17_asteroid3zap2"), ExtResource("19_asteroid4zap2")])

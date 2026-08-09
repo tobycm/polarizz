@@ -1,30 +1,61 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://djf3qdcy6lyqd"]
 
 [ext_resource type="Script" uid="uid://16s8y4q08g3e" path="res://scripts/enemy.gd" id="1_asteroid"]
 [ext_resource type="Texture2D" uid="uid://lau5m6yn27gm" path="res://assets/asteroid_1.png" id="2_asteroid"]
+[ext_resource type="Texture2D" uid="uid://0rpgp64cw135" path="res://assets/asteroid_1_zap_1.png" id="3_bc644"]
+[ext_resource type="Texture2D" uid="uid://ckiy1qkqqlu4q" path="res://assets/asteroid_1_zap_2.png" id="4_4h053"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_asteroid"]
 radius = 13.0
 
-[node name="AsteroidEnemy" type="CharacterBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ata8d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_asteroid")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bc644")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4h053")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bc644")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4h053")
+}],
+"loop": false,
+"name": &"zap",
+"speed": 5.0
+}]
+
+[node name="AsteroidEnemy" type="CharacterBody2D" unique_id=2081900489]
 scale = Vector2(4.172, 4.172)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_asteroid")
 hit_points = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_asteroid")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=530234819]
 shape = SubResource("CircleShape2D_asteroid")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1231309085]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=300370768]
 shape = SubResource("CircleShape2D_asteroid")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1719009743]
+sprite_frames = SubResource("SpriteFrames_ata8d")
+autoplay = "default"
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

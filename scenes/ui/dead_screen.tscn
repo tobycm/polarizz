@@ -1,53 +1,57 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dya2yiqwlad85"]
 
-[ext_resource type="Script" path="res://scripts/dead_screen.gd" id="1_dead"]
-[ext_resource type="Script" path="res://scripts/dead_screen_field.gd" id="2_field"]
+[ext_resource type="Script" uid="uid://dtupqcbiranv6" path="res://scripts/dead_screen.gd" id="1_dead"]
+[ext_resource type="Script" uid="uid://ce8qna5ad8odn" path="res://scripts/dead_screen_field.gd" id="2_field"]
 [ext_resource type="Texture2D" uid="uid://lau5m6yn27gm" path="res://assets/asteroid_1.png" id="3_asteroid1"]
 [ext_resource type="Texture2D" uid="uid://tpn3lo68y4fq" path="res://assets/asteroid_2.png" id="4_asteroid2"]
 [ext_resource type="Texture2D" uid="uid://blmlk5siehx32" path="res://assets/asteroid_3.png" id="5_asteroid3"]
 [ext_resource type="Texture2D" uid="uid://cl08s0ytkepub" path="res://assets/asteroid_4.png" id="6_asteroid4"]
 
-[node name="DeadScreen" type="CanvasLayer"]
-layer = 6
+[node name="DeadScreen" type="CanvasLayer" unique_id=598917107]
 script = ExtResource("1_dead")
 
-[node name="Overlay" type="Control" parent="."]
+[node name="Overlay" type="Control" parent="." unique_id=666583319]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="Overlay"]
+[node name="Background" type="ColorRect" parent="Overlay" unique_id=25092683]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="CometField" type="Node2D" parent="Overlay"]
+[node name="CometField" type="Node2D" parent="Overlay" unique_id=139605111]
 script = ExtResource("2_field")
-asteroid_textures = [ExtResource("3_asteroid1"), ExtResource("4_asteroid2"), ExtResource("5_asteroid3"), ExtResource("6_asteroid4")]
+asteroid_textures = Array[Texture2D]([ExtResource("3_asteroid1"), ExtResource("4_asteroid2"), ExtResource("5_asteroid3"), ExtResource("6_asteroid4")])
 
-[node name="Center" type="CenterContainer" parent="Overlay"]
+[node name="Center" type="CenterContainer" parent="Overlay" unique_id=2111429850]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Center"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Center" unique_id=2090682275]
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Label" type="Label" parent="Overlay/Center/VBoxContainer"]
+[node name="Label" type="Label" parent="Overlay/Center/VBoxContainer" unique_id=274717143]
 layout_mode = 2
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 48
 text = "YOU DIED"
+horizontal_alignment = 1
 
-[node name="RespawnButton" type="Button" parent="Overlay/Center/VBoxContainer"]
+[node name="RespawnButton" type="Button" parent="Overlay/Center/VBoxContainer" unique_id=645722941]
 layout_mode = 2
 text = "Respawn"
 

@@ -6,7 +6,7 @@ const POINT_RADIUS := 6.0
 const POINT_COLOR := Color.RED
 const LINE_COLOR := Color.WHITE
 
-const ACTIVE_TIME := 1.0
+const ACTIVE_TIME := 3.0
 @onready var line: Line2D = $Line2D
 @onready var polygon: Polygon2D = $Polygon2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
@@ -28,13 +28,15 @@ func _ready() -> void:
 	line.position = Vector2.ZERO
 
 
+
+const LINE_SCROLL_SPEED := 150.0
+
 func _process(delta: float) -> void:
 	if zapper_active:
 		active_timer += delta
+
 		if active_timer >= ACTIVE_TIME:
 			reset_zapper()
-
-
 func addPoint(tower_position: Vector2, tower:Node2D) -> void:
 	if polygon_finished:
 		return

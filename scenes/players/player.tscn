@@ -49,6 +49,7 @@ animation = &"walk"
 autoplay = "stand"
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1391225401]
+default_color = Color(0.72346795, 0.6951563, 1, 0.7294118)
 
 [node name="Area2D" type="Area2D" parent="Line2D" unique_id=1465436263]
 
