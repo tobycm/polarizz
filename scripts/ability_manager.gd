@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const LAST_ABILITY_LEVEL := 3
+
 @onready var overlay: Control = $Overlay
 @onready var card_container: HBoxContainer = $Overlay/Cards/HBoxContainer
 
@@ -12,6 +14,14 @@ func _ready() -> void:
 
 
 func show_cards() -> void:
+	var scene_manager = get_tree().get_first_node_in_group("scene_manager")
+
+	# Only offer ability cards after the asteroid levels (1-3). Beyond that,
+	# skip straight to the next level so the page never shows again.
+	if scene_manager and scene_manager.current_level >= LAST_ABILITY_LEVEL:
+		scene_manager.increase_level()
+		return
+
 	overlay.visible = true
 
 

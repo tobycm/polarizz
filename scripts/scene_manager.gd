@@ -17,9 +17,9 @@ var current_level := 1
 var levels := {
 	1: preload("res://scenes/levels/level_1.tscn"),
 	2: preload("res://scenes/levels/level_2.tscn"),
-	3: preload("res://scenes/levels/level_1.tscn"),
-	4: preload("res://scenes/levels/level_1.tscn"),
-	5: preload("res://scenes/levels/level_1.tscn")
+	3: preload("res://scenes/levels/level_3.tscn"),
+	4: preload("res://scenes/levels/level_4.tscn"),
+	5: preload("res://scenes/levels/level_5.tscn")
 }
 
 
