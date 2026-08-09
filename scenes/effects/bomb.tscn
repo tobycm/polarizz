@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/bomb.gd" id="1_bomb"]
+[ext_resource type="Texture2D" uid="uid://b5kx4nmohsmkc" path="res://assets/tnt.png" id="2_tnt0"]
+[ext_resource type="Texture2D" uid="uid://cmk0raqpo5kl3" path="res://assets/tnt_1.png" id="3_tnt1"]
+[ext_resource type="Texture2D" uid="uid://bp7iqewvlxp10" path="res://assets/tnt_2.png" id="4_tnt2"]
+[ext_resource type="Texture2D" uid="uid://jb30x1i5lkox" path="res://assets/tnt_3.png" id="5_tnt3"]
+[ext_resource type="Texture2D" uid="uid://bprcmpfsnwvhs" path="res://assets/explosion1.png" id="6_exp1"]
+[ext_resource type="Texture2D" uid="uid://c8rvtchkcqjy6" path="res://assets/explosion2.png" id="7_exp2"]
+[ext_resource type="Texture2D" uid="uid://cwy53nmqo4swh" path="res://assets/explosion3.png" id="8_exp3"]
+
+[node name="Bomb" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_bomb")
+tnt_frames = [ExtResource("2_tnt0"), ExtResource("3_tnt1"), ExtResource("4_tnt2"), ExtResource("5_tnt3")]
+explosion_frames = [ExtResource("6_exp1"), ExtResource("7_exp2"), ExtResource("8_exp3")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tnt0")

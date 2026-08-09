@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ability_manager.gd" id="1_manager"]
 [ext_resource type="PackedScene" path="res://scenes/menus/ability_.tscn" id="2_card"]
 [ext_resource type="Texture2D" path="res://assets/abilities/speed_card_1.png" id="3_tex1"]
-[ext_resource type="Texture2D" path="res://assets/abilities/speed_card_2.png" id="4_tex2"]
+[ext_resource type="Texture2D" uid="uid://bdib46w1llboc" path="res://assets/abilities/bomb_1.png" id="4_tex2"]
 [ext_resource type="Texture2D" path="res://assets/abilities/speed_card_3.png" id="5_tex3"]
 
 [node name="AbilityManager" type="CanvasLayer" unique_id=696738261]
@@ -38,14 +38,17 @@ theme_override_constants/separation = 24
 [node name="Card1" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
 layout_mode = 2
 texture = ExtResource("3_tex1")
-speed_boost = 0.1
+ability_id = "speed"
+value = 0.1
 
 [node name="Card2" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
 layout_mode = 2
 texture = ExtResource("4_tex2")
-speed_boost = 0.15
+ability_id = "bomb"
+value = 1.0
 
 [node name="Card3" parent="Overlay/Cards/HBoxContainer" instance=ExtResource("2_card")]
 layout_mode = 2
 texture = ExtResource("5_tex3")
-speed_boost = 0.2
+ability_id = "speed"
+value = 0.2

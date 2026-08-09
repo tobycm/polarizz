@@ -19,11 +19,17 @@ func hide_cards() -> void:
 	overlay.visible = false
 
 
-func _on_card_selected(speed_boost: float) -> void:
+func _on_card_selected(ability_id: String, value: float) -> void:
 	hide_cards()
 
 	var player = get_tree().get_first_node_in_group("player")
-	if player and player.has_method("apply_speed_boost"):
-		player.apply_speed_boost(speed_boost)
+
+	match ability_id:
+		"speed":
+			if player and player.has_method("apply_speed_boost"):
+				player.apply_speed_boost(value)
+		"bomb":
+			if player and player.has_method("add_bomb"):
+				player.add_bomb(int(value))
 
 	get_tree().get_first_node_in_group("scene_manager").increase_level()

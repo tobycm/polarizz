@@ -1,9 +1,10 @@
 extends Button
 
-signal selected(speed_boost: float)
+signal selected(ability_id: String, value: float)
 
 @export var texture: Texture2D
-@export var speed_boost: float = 0.0
+@export var ability_id: String = "speed"
+@export var value: float = 0.0
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var label: Label = $Label
@@ -11,5 +12,15 @@ signal selected(speed_boost: float)
 
 func _ready() -> void:
 	texture_rect.texture = texture
-	label.text = "+%d%% Speed" % int(round(speed_boost * 100.0))
-	pressed.connect(func() -> void: selected.emit(speed_boost))
+	label.text = _label_text()
+	pressed.connect(func() -> void: selected.emit(ability_id, value))
+
+
+func _label_text() -> String:
+	match ability_id:
+		"speed":
+			return "+%d%% Speed" % int(round(value * 100.0))
+		"bomb":
+			return "Bomb"
+		_:
+			return ability_id

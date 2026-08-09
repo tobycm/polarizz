@@ -15,11 +15,16 @@ const DASH_GHOST_COLOR := Color(0.6, 0.85, 1.0, 0.5)
 
 const MAX_LIVES := 3
 
+const BOMB_SCENE := preload("res://scenes/effects/bomb.tscn")
+const BOMB_COOLDOWN := 10.0
+
 var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_dir := Vector2.RIGHT
 var last_input_dir := Vector2.RIGHT
 var speed_multiplier := 1.0
+var bombs := 0
+var bomb_cooldown_timer := 0.0
 var zapper
 var lives := MAX_LIVES
 var is_dead := false
@@ -89,6 +94,19 @@ func _physics_process(delta: float) -> void:
 
 
 	# =====================================================
+	# BOMB
+	# =====================================================
+
+	if Input.is_action_just_pressed("bomb") \
+			and bomb_cooldown_timer <= 0.0 \
+			and bombs > 0:
+
+		_throw_bomb()
+		bombs -= 1
+		bomb_cooldown_timer = BOMB_COOLDOWN
+
+
+	# =====================================================
 	# TIMERS
 	# =====================================================
 
@@ -97,6 +115,9 @@ func _physics_process(delta: float) -> void:
 
 	if dash_cooldown_timer > 0.0:
 		dash_cooldown_timer -= delta
+
+	if bomb_cooldown_timer > 0.0:
+		bomb_cooldown_timer -= delta
 
 
 	# =====================================================
@@ -176,6 +197,17 @@ func _spawn_dash_ghost() -> void:
 
 func apply_speed_boost(boost: float) -> void:
 	speed_multiplier += boost
+
+
+func add_bomb(amount: int = 1) -> void:
+	bombs += amount
+
+
+func _throw_bomb() -> void:
+	var bomb := BOMB_SCENE.instantiate()
+	bomb.global_position = global_position
+
+	get_parent().add_child(bomb)
 
 
 func reset() -> void:
