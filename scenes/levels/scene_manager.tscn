@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://5gpl7u0fcgja" path="res://scripts/scene_manager.gd" id="1_f3ops"]
 [ext_resource type="PackedScene" uid="uid://bbaj8evew5mgr" path="res://scenes/players/player.tscn" id="2_fkay7"]
 [ext_resource type="PackedScene" uid="uid://0qbx21i6j2qs" path="res://scenes/menus/ability_manager.tscn" id="3_ability"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dead_screen.tscn" id="5_dead"]
+[ext_resource type="PackedScene" uid="uid://cc6pnkcfwikvn" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://dya2yiqwlad85" path="res://scenes/ui/dead_screen.tscn" id="5_dead"]
 [ext_resource type="Texture2D" uid="uid://bp08r2uikvt2o" path="res://assets/ui_overlay .png" id="6_ybmp1"]
+[ext_resource type="Script" path="res://scripts/upgrader_panel.gd" id="7_upgrader"]
 
 [node name="SceneManager" type="Node2D" unique_id=754255433]
 script = ExtResource("1_f3ops")
@@ -33,3 +34,6 @@ mouse_filter = 2
 texture = ExtResource("6_ybmp1")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="UpgraderPanel" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("7_upgrader")

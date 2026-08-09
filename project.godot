@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://dycu7odg7t4ky"
+ScreenShake="*res://scripts/screen_shake.gd"
 
 [display]
 

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
+@export var speed: float = 50.0
 @export var hit_points: int = 1
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -48,6 +48,7 @@ func _die() -> void:
 	velocity = Vector2.ZERO
 
 	Global.add_kill_score()
+	ScreenShake.shake(4.0, 0.15)
 
 	# Stop movement and play zap animation
 	animated_sprite.play("zap")

@@ -26,6 +26,8 @@ func _play_fuse() -> void:
 
 
 func _explode() -> void:
+	ScreenShake.shake(14.0, 0.35)
+
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(enemy):
 			continue
