@@ -6,12 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://tpn3lo68y4fq" path="res://assets/asteroid_2.png" id="4_asteroid2"]
 [ext_resource type="Texture2D" uid="uid://blmlk5siehx32" path="res://assets/asteroid_3.png" id="5_asteroid3"]
 [ext_resource type="Texture2D" uid="uid://cl08s0ytkepub" path="res://assets/asteroid_4.png" id="6_asteroid4"]
+[ext_resource type="FontFile" uid="uid://bmp0gn4won5mw" path="res://assets/asvoriapixelregular-1j2lm.otf" id="7_ggyk4"]
+[ext_resource type="FontFile" uid="uid://doq8hkmle37ck" path="res://assets/Handjet-VariableFont_ELGR,ELSH,wght.ttf" id="8_nlo2r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0i0xa"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_detail = 20
 
 [node name="DeadScreen" type="CanvasLayer" unique_id=598917107]
 script = ExtResource("1_dead")
 
 [node name="Overlay" type="Control" parent="." unique_id=666583319]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,22 +56,27 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Overlay/Center/VBoxContainer" unique_id=274717143]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("7_ggyk4")
+theme_override_font_sizes/font_size = 75
 text = "YOU DIED"
 horizontal_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="Overlay/Center/VBoxContainer"]
+[node name="StatsLabel" type="Label" parent="Overlay/Center/VBoxContainer" unique_id=1946986984]
 layout_mode = 2
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.75, 0.9, 1.0, 1)
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
 theme_override_constants/line_spacing = 8
+theme_override_fonts/font = ExtResource("8_nlo2r")
+theme_override_font_sizes/font_size = 25
 text = "SCORE 000000
 HIGH SCORE 000000
 BEST LEVEL 00"
+horizontal_alignment = 1
 
 [node name="RespawnButton" type="Button" parent="Overlay/Center/VBoxContainer" unique_id=645722941]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0i0xa")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0i0xa")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0i0xa")
 text = "Respawn"
 
 [connection signal="pressed" from="Overlay/Center/VBoxContainer/RespawnButton" to="." method="_on_respawn_pressed"]

@@ -55,3 +55,9 @@ enemy_num = 10
 sprite_variants = Array[Texture2D]([ExtResource("8_asteroid1"), ExtResource("9_asteroid2"), ExtResource("10_asteroid3"), ExtResource("11_asteroid4")])
 zap_variants_1 = Array[Texture2D]([ExtResource("12_asteroid1zap1"), ExtResource("14_asteroid2zap1"), ExtResource("16_asteroid3zap1"), ExtResource("18_asteroid4zap1")])
 zap_variants_2 = Array[Texture2D]([ExtResource("13_asteroid1zap2"), ExtResource("15_asteroid2zap2"), ExtResource("17_asteroid3zap2"), ExtResource("19_asteroid4zap2")])
+
+[node name="tower2" parent="." unique_id=1999638219 groups=["tower"] instance=ExtResource("2_yluh8")]
+position = Vector2(-378, -645)
+
+[node name="tower6" parent="." unique_id=869707553 groups=["tower"] instance=ExtResource("2_yluh8")]
+position = Vector2(514, -553)

@@ -49,7 +49,9 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
-	zapper = get_tree().get_first_node_in_group("zapper")
+	if zapper == null or not is_instance_valid(zapper):
+		zapper = get_tree().get_first_node_in_group("zapper")
+
 	var input_dir := Input.get_vector(
 		"ui_left",
 		"ui_right",
@@ -91,6 +93,7 @@ func _physics_process(delta: float) -> void:
 		dash_dir = last_input_dir
 		dash_timer = DASH_TIME
 		dash_cooldown_timer = DASH_COOLDOWN
+		_update_dash_hud(false)
 
 
 	# =====================================================
@@ -115,6 +118,9 @@ func _physics_process(delta: float) -> void:
 
 	if dash_cooldown_timer > 0.0:
 		dash_cooldown_timer -= delta
+
+		if dash_cooldown_timer <= 0.0:
+			_update_dash_hud(true)
 
 	if bomb_cooldown_timer > 0.0:
 		bomb_cooldown_timer -= delta
@@ -201,6 +207,7 @@ func apply_speed_boost(boost: float) -> void:
 
 func add_bomb(amount: int = 1) -> void:
 	bombs += amount
+	_update_bomb_hud()
 
 
 func _throw_bomb() -> void:
@@ -208,6 +215,19 @@ func _throw_bomb() -> void:
 	bomb.global_position = global_position
 
 	get_parent().add_child(bomb)
+	_update_bomb_hud()
+
+
+func _update_bomb_hud() -> void:
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("set_bombs"):
+		hud.set_bombs(bombs)
+
+
+func _update_dash_hud(is_ready: bool) -> void:
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("set_dash_ready"):
+		hud.set_dash_ready(is_ready)
 
 
 func reset() -> void:
@@ -252,6 +272,8 @@ func die() -> void:
 func respawn() -> void:
 	lives = MAX_LIVES
 	is_dead = false
+	bombs = 0
+	dash_cooldown_timer = 0.0
 	velocity = Vector2.ZERO
 	global_position = spawn_position
 	reset()
@@ -262,6 +284,9 @@ func respawn() -> void:
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud and hud.has_method("set_hearts"):
 		hud.set_hearts(lives)
+
+	_update_bomb_hud()
+	_update_dash_hud(true)
 
 
 # =========================================================

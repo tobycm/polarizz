@@ -29,8 +29,6 @@ func _ready() -> void:
 
 
 
-const LINE_SCROLL_SPEED := 150.0
-
 func _process(delta: float) -> void:
 	if zapper_active:
 		active_timer += delta

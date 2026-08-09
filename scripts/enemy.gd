@@ -48,6 +48,7 @@ func _die() -> void:
 	velocity = Vector2.ZERO
 
 	Global.add_kill_score()
+	ScreenShake.shake(4.0, 0.15)
 
 	# Stop movement and play zap animation
 	animated_sprite.play("zap")
