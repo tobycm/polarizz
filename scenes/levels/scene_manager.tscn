@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cc6pnkcfwikvn" path="res://scenes/ui/hud.tscn" id="4_hud"]
 [ext_resource type="PackedScene" uid="uid://dya2yiqwlad85" path="res://scenes/ui/dead_screen.tscn" id="5_dead"]
 [ext_resource type="Texture2D" uid="uid://bp08r2uikvt2o" path="res://assets/ui_overlay .png" id="6_ybmp1"]
+[ext_resource type="Script" path="res://scripts/upgrader_panel.gd" id="7_upgrader"]
 
 [node name="SceneManager" type="Node2D" unique_id=754255433]
 script = ExtResource("1_f3ops")
@@ -28,3 +29,6 @@ layer = 3
 position = Vector2(573, 349)
 scale = Vector2(0.5864036, 0.5877042)
 texture = ExtResource("6_ybmp1")
+
+[node name="UpgraderPanel" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("7_upgrader")

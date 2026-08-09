@@ -42,4 +42,8 @@ func _on_card_selected(ability_id: String, value: float) -> void:
 			if player and player.has_method("add_bomb"):
 				player.add_bomb(int(value))
 
+	var upgrader_panel = get_tree().get_first_node_in_group("upgrader_panel")
+	if upgrader_panel and upgrader_panel.has_method("add_ability_icon"):
+		upgrader_panel.add_ability_icon(ability_id)
+
 	get_tree().get_first_node_in_group("scene_manager").increase_level()
