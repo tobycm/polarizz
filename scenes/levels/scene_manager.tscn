@@ -14,8 +14,8 @@ script = ExtResource("1_f3ops")
 [node name="player" parent="." unique_id=1099106914 instance=ExtResource("2_fkay7")]
 z_index = 1
 
-[node name="AbilityManager" parent="." instance=ExtResource("3_ability")]
+[node name="AbilityManager" parent="." unique_id=1347464987 instance=ExtResource("3_ability")]
 
-[node name="HUD" parent="." instance=ExtResource("4_hud")]
+[node name="HUD" parent="." unique_id=1257814379 instance=ExtResource("4_hud")]
 
-[node name="DeadScreen" parent="." instance=ExtResource("5_dead")]
+[node name="DeadScreen" parent="." unique_id=873751147 instance=ExtResource("5_dead")]

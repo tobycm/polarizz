@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var overlay: Control = $Overlay
+@onready var comet_field: Node2D = $Overlay/CometField
 
 
 func _ready() -> void:
@@ -10,10 +11,12 @@ func _ready() -> void:
 
 func show_dead() -> void:
 	overlay.visible = true
+	comet_field.start()
 
 
 func hide_dead() -> void:
 	overlay.visible = false
+	comet_field.stop()
 
 
 func _on_respawn_pressed() -> void:

@@ -1,6 +1,11 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/dead_screen.gd" id="1_dead"]
+[ext_resource type="Script" path="res://scripts/dead_screen_field.gd" id="2_field"]
+[ext_resource type="Texture2D" uid="uid://lau5m6yn27gm" path="res://assets/asteroid_1.png" id="3_asteroid1"]
+[ext_resource type="Texture2D" uid="uid://tpn3lo68y4fq" path="res://assets/asteroid_2.png" id="4_asteroid2"]
+[ext_resource type="Texture2D" uid="uid://blmlk5siehx32" path="res://assets/asteroid_3.png" id="5_asteroid3"]
+[ext_resource type="Texture2D" uid="uid://cl08s0ytkepub" path="res://assets/asteroid_4.png" id="6_asteroid4"]
 
 [node name="DeadScreen" type="CanvasLayer"]
 layer = 6
@@ -14,12 +19,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 0
 
-[node name="Dim" type="ColorRect" parent="Overlay"]
+[node name="Background" type="ColorRect" parent="Overlay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.75)
+color = Color(0, 0, 0, 1)
+
+[node name="CometField" type="Node2D" parent="Overlay"]
+script = ExtResource("2_field")
+asteroid_textures = [ExtResource("3_asteroid1"), ExtResource("4_asteroid2"), ExtResource("5_asteroid3"), ExtResource("6_asteroid4")]
 
 [node name="Center" type="CenterContainer" parent="Overlay"]
 layout_mode = 1
