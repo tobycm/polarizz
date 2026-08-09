@@ -55,6 +55,7 @@ func load_level(level: int) -> void:
 	level_container.add_child(new_level)
 
 	current_level = level
+	Global.register_level(level)
 
 
 func increase_level() -> void:

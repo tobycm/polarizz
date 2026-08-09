@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var overlay: Control = $Overlay
 @onready var comet_field: Node2D = $Overlay/CometField
+@onready var stats_label: Label = $Overlay/Center/VBoxContainer/StatsLabel
 
 
 func _ready() -> void:
@@ -12,6 +13,12 @@ func _ready() -> void:
 func show_dead() -> void:
 	overlay.visible = true
 	comet_field.start()
+
+	stats_label.text = "SCORE %06d\nHIGH SCORE %06d\nBEST LEVEL %02d" % [
+		Global.score,
+		Global.high_score,
+		Global.highest_level,
+	]
 
 
 func hide_dead() -> void:

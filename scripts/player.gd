@@ -257,6 +257,8 @@ func respawn() -> void:
 	reset()
 	show()
 
+	Global.reset_run()
+
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud and hud.has_method("set_hearts"):
 		hud.set_hearts(lives)

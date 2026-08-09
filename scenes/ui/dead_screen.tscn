@@ -51,6 +51,16 @@ theme_override_font_sizes/font_size = 48
 text = "YOU DIED"
 horizontal_alignment = 1
 
+[node name="StatsLabel" type="Label" parent="Overlay/Center/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.75, 0.9, 1.0, 1)
+theme_override_constants/line_spacing = 8
+text = "SCORE 000000
+HIGH SCORE 000000
+BEST LEVEL 00"
+
 [node name="RespawnButton" type="Button" parent="Overlay/Center/VBoxContainer" unique_id=645722941]
 layout_mode = 2
 text = "Respawn"

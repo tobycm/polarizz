@@ -47,6 +47,8 @@ func _die() -> void:
 	remove_from_group("enemies")
 	velocity = Vector2.ZERO
 
+	Global.add_kill_score()
+
 	# Stop movement and play zap animation
 	animated_sprite.play("zap")
 
