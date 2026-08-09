@@ -3,7 +3,7 @@
 <p align="center">A rogue-like top down game where you connect towers together to create areas of damage.</p>
 
 <p align="center">
-  <img src="https://user-cdn.hackclub-assets.com/019fe67c-842b-7143-b6e1-ef4493d5579f/full_game_readme_image.png" width="100%">
+  <img src="https://user-cdn.hackclub-assets.com/019fe6b3-a2a5-70a6-bfa0-04e0203ab21e/SCR-20260809-iqps.png" width="100%">
 </p>
 
 <p align="center">
