@@ -24,7 +24,12 @@ z_index = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1682724076]
 layer = 3
 
-[node name="UiOverlay" type="Sprite2D" parent="CanvasLayer" unique_id=1396610397]
-position = Vector2(573, 349)
-scale = Vector2(0.5864036, 0.5877042)
+[node name="UiOverlay" type="TextureRect" parent="CanvasLayer" unique_id=1396610397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource("6_ybmp1")
+expand_mode = 1
+stretch_mode = 5
