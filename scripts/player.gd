@@ -8,7 +8,10 @@ const BASE_MOVE_SPEED := 430.0
 
 const DASH_SPEED := 900.0
 const DASH_TIME := 0.08
-const DASH_COOLDOWN := 0.14
+const DASH_COOLDOWN := 2.0
+
+const DASH_GHOST_FADE_TIME := 0.25
+const DASH_GHOST_COLOR := Color(0.6, 0.85, 1.0, 0.5)
 
 const MAX_LIVES := 3
 
@@ -77,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	# DASH
 	# =====================================================
 
-	if Input.is_action_just_pressed("ui_accept") \
+	if Input.is_action_just_pressed("dash") \
 			and dash_cooldown_timer <= 0.0:
 
 		dash_dir = last_input_dir
@@ -102,6 +105,7 @@ func _physics_process(delta: float) -> void:
 
 	if dash_timer > 0.0:
 		velocity = dash_dir * DASH_SPEED
+		_spawn_dash_ghost()
 	else:
 		velocity = input_dir * move_speed
 
@@ -139,6 +143,31 @@ func _physics_process(delta: float) -> void:
 
 	if velocity.x != 0.0:
 		animated_sprite_2d.flip_h = velocity.x > 0
+
+
+# =========================================================
+# DASH TRAIL
+# =========================================================
+
+func _spawn_dash_ghost() -> void:
+	var frames := animated_sprite_2d.sprite_frames
+	if frames == null:
+		return
+
+	var ghost := Sprite2D.new()
+	ghost.texture = frames.get_frame_texture(animated_sprite_2d.animation, animated_sprite_2d.frame)
+	ghost.global_position = animated_sprite_2d.global_position
+	ghost.global_rotation = animated_sprite_2d.global_rotation
+	ghost.global_scale = animated_sprite_2d.global_scale
+	ghost.flip_h = animated_sprite_2d.flip_h
+	ghost.modulate = DASH_GHOST_COLOR
+	ghost.z_index = z_index - 1
+
+	get_parent().add_child(ghost)
+
+	var tween := ghost.create_tween()
+	tween.tween_property(ghost, "modulate:a", 0.0, DASH_GHOST_FADE_TIME)
+	tween.tween_callback(ghost.queue_free)
 
 
 # =========================================================
