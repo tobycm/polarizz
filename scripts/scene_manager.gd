@@ -29,6 +29,10 @@ var levels := {
 @onready var level_container: Node2D = $level_container
 
 
+# =====================================================
+# MUSIC
+# =====================================================
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 
 # =====================================================
@@ -38,6 +42,9 @@ var levels := {
 func _ready() -> void:
 	add_to_group("scene_manager")
 	load_level(current_level)
+
+	music_player.finished.connect(music_player.play)
+	music_player.play()
 
 
 func load_level(level: int) -> void:

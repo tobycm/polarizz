@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bprcmpfsnwvhs" path="res://assets/explosion1.png" id="6_exp1"]
 [ext_resource type="Texture2D" uid="uid://c8rvtchkcqjy6" path="res://assets/explosion2.png" id="7_exp2"]
 [ext_resource type="Texture2D" uid="uid://cwy53nmqo4swh" path="res://assets/explosion3.png" id="8_exp3"]
+[ext_resource type="AudioStream" path="res://assets/audio/explosion.wav" id="9_explosion_sfx"]
 
 [node name="Bomb" type="Node2D"]
 scale = Vector2(5, 5)
@@ -17,3 +18,6 @@ explosion_frames = [ExtResource("6_exp1"), ExtResource("7_exp2"), ExtResource("8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tnt0")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_explosion_sfx")

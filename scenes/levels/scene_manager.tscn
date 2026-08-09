@@ -7,11 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://dya2yiqwlad85" path="res://scenes/ui/dead_screen.tscn" id="5_dead"]
 [ext_resource type="Texture2D" uid="uid://bp08r2uikvt2o" path="res://assets/ui_overlay .png" id="6_ybmp1"]
 [ext_resource type="Script" path="res://scripts/upgrader_panel.gd" id="7_upgrader"]
+[ext_resource type="AudioStream" path="res://assets/audio/music.mp3" id="8_music"]
 
 [node name="SceneManager" type="Node2D" unique_id=754255433]
 script = ExtResource("1_f3ops")
 
 [node name="level_container" type="Node2D" parent="." unique_id=1646759399]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_music")
+volume_db = -14.0
 
 [node name="player" parent="." unique_id=1099106914 instance=ExtResource("2_fkay7")]
 z_index = 1

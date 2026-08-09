@@ -28,7 +28,7 @@ No external dependencies or package installs are required — everything the pro
 
 | Action | Key |
 | --- | --- |
-| Move | Arrow Keys |
+| Move | WASD |
 | Dash | Shift (2s cooldown) |
 | Bomb | J (10s cooldown, requires a collected Bomb ability) |
 | Connect towers | Walk into a tower to draw a line to it — closing the loop between 3+ towers creates a damage zone |
