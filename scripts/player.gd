@@ -259,6 +259,10 @@ func respawn() -> void:
 
 	Global.reset_run()
 
+	var upgrader_panel = get_tree().get_first_node_in_group("upgrader_panel")
+	if upgrader_panel and upgrader_panel.has_method("clear_icons"):
+		upgrader_panel.clear_icons()
+
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud and hud.has_method("set_hearts"):
 		hud.set_hearts(lives)
